@@ -1,4 +1,4 @@
-import { AWSError, Request } from 'aws-sdk';
+import { AWSError, Request, Response } from 'aws-sdk';
 import { DeleteItemOutput, PutItemOutput, QueryOutput, UpdateItemOutput } from 'aws-sdk/clients/dynamodb';
 
 import { PublicType, ShortUrl } from '../../../src/models/ShortUrl';
@@ -17,7 +17,7 @@ describe('urlService testing', () => {
   it('getAllPublic should not throw', async () => {
     jest.spyOn(dynamodb, 'query').mockReturnValue({
       promise: async () => ({
-        $response: {} as any,
+        $response: {} as Response<QueryOutput, AWSError>,
         Items: []
       })
     } as Request<QueryOutput, AWSError>);
@@ -31,7 +31,7 @@ describe('urlService testing', () => {
     ];
     jest.spyOn(dynamodb, 'query').mockReturnValue({
       promise: async () => ({
-        $response: {} as any,
+        $response: {} as Response<QueryOutput, AWSError>,
         Items: returnedArray
       })
     } as unknown as Request<QueryOutput, AWSError>);
@@ -50,7 +50,7 @@ describe('urlService testing', () => {
   it('getById should not throw', async () => {
     jest.spyOn(dynamodb, 'query').mockReturnValue({
       promise: async () => ({
-        $response: {} as any,
+        $response: {} as Response<QueryOutput, AWSError>,
         Items: []
       })
     } as Request<QueryOutput, AWSError>);
@@ -63,7 +63,7 @@ describe('urlService testing', () => {
     ];
     jest.spyOn(dynamodb, 'query').mockReturnValue({
       promise: async () => ({
-        $response: {} as any,
+        $response: {} as Response<QueryOutput, AWSError>,
         Items: returnedArray
       })
     } as unknown as Request<QueryOutput, AWSError>);
@@ -74,7 +74,7 @@ describe('urlService testing', () => {
   it('insert should not throw', async () => {
     jest.spyOn(dynamodb, 'put').mockReturnValue({
       promise: async () => ({
-        $response: {} as any
+        $response: {} as Response<QueryOutput, AWSError>
       })
     } as Request<PutItemOutput, AWSError>);
 
@@ -96,7 +96,7 @@ describe('urlService testing', () => {
   it('incrementViews should not throw', async () => {
     jest.spyOn(dynamodb, 'update').mockReturnValue({
       promise: async () => ({
-        $response: {} as any
+        $response: {} as Response<QueryOutput, AWSError>
       })
     } as Request<UpdateItemOutput, AWSError>);
 
@@ -106,7 +106,7 @@ describe('urlService testing', () => {
   it('delete should not throw', async () => {
     jest.spyOn(dynamodb, 'delete').mockReturnValue({
       promise: async () => ({
-        $response: {} as any
+        $response: {} as Response<QueryOutput, AWSError>
       })
     } as Request<DeleteItemOutput, AWSError>);
 
